@@ -1,0 +1,17 @@
+#!/usr/local/bin/python3.3
+#practice- not used on website
+print ("Content-type:text/html")
+print()
+print()
+print ("<html>")
+print ('<head>')
+print ('<title>Hello Word - First CGI Program</title>')
+print ('<style>')
+print ('<link href="style.py" type="text/css" rel="stylesheet">')
+print ('</style>')
+print ('</head>')
+print ('<body>')
+print ('<h2>Hello World! This is my first CGI program</h2>')
+print ('<p>My name is Rowan and I am still learning html. Is this how things are done?</p>')
+print ('</body>')
+print ('</html>')
