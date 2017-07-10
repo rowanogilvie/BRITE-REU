@@ -25,6 +25,7 @@ if cookie:
     uname = cookie["uname"].value
     form = cgi.FieldStorage()
     geneFile = form.getvalue("file")
+#     sid = form.getvalue("study")
     
     #reduce redundancy
     user="d4prdb17"
@@ -163,10 +164,11 @@ if cookie:
         
         print("""
         <div id="content" align = "center"> 
-             <h3 class="lead">Upload BED file To A New Experiment</h3>
+             <h2 class="lead">Upload BED file To A New Experiment</h2>
+             <h5 class="lead" style="color:red ! important;">* = required field</h5>
               <form method="post" action="./upload_v0.1.py" enctype="multipart/form-data" >
               <dl>
-                  <dt class="optional" id="file_dt" align="center"><label for="file">Upload BED File:
+                  <dt class="optional" id="file_dt" align="center"><label for="file">* Upload BED File:
                       </label></dt>
                   <input type="file" name="file" id="file">
                   </br>
@@ -184,7 +186,7 @@ if cookie:
                       <br />
                       <b>BEDtools command:</b><input type="text" name = "command">
                   </div></br>
-                   <b>Project: </b><select name='project' id="project" onchange="showstudies(this.value)";>
+                   <b>* Project: </b><select name='project' id="project" onchange="showstudies(this.value)";>
                      <option>-- please select a project-- </option>""")
         for row in projects:
           print("""     <option value="%s">%s</option>""" % (row[0], row[1]))
@@ -194,7 +196,7 @@ if cookie:
                   <a title="Click to add a new Project first" href="./showproject.py">(set up new project)</a>
                   <br />
                   <br />
-                  <b>Studies: </b>
+                  <b>* Studies: </b>
                   <select name='study' id="study" onchange="showexps(this.value)";>
                   <option>-- please select a study-- </option>
                   </select>
@@ -205,10 +207,15 @@ if cookie:
         """
         Platform = RunQuery(q6, user, passwd)
         
+#         q6 = """
+#         select plid, plname from Platform 
+#         where sid ="%s"
+#         """ % sid
+        
         print("""
                   <br />
                   <br />
-                  <b>Experiments: </b>
+                  <b>* Experiments: </b>
                   <select name='exp' id="exp" onchange="showbeds(this.value)";>
                   <option>-- please select a experiment--</option>
                   </select>
@@ -219,12 +226,12 @@ if cookie:
 
         print("""
                   </br>
-                  <b>Platform: </b>
+                  <b>* Platform: </b>
                   <select name='plt' id="plt">
                   <option value=""> -- please select a Platform--</option>""")
         for row in Platform:
           print("""     <option value="%s">%s</option>""" % (row[0], row[1]))
-          
+           
           
         print(""" 
                   </select>
@@ -243,7 +250,7 @@ if cookie:
         print("""
                 </br>
                   <br />
-                  <b>Computational method: </b>
+                  <b>* Computational method: </b>
                   <select name='Com' id="exp">
                   <option value=""> -- please select a computational method--</option>""")
         for row in ComMethod:
@@ -262,7 +269,7 @@ if cookie:
         print("""
                   <br />
                   <br />
-                  <b>Wetlab method: </b>
+                  <b>* Wetlab method: </b>
                   <select name='Wet' id="exp";">
                   <option value="">-- please select a wetlab method--</option>""")
         for row in WetMethod:
@@ -277,7 +284,7 @@ if cookie:
         print("""
     </br>
     </br>
-    <p><input type="submit" value="upload" /></p>
+    <p><input type="submit" value="upload" class="btn btn-lg btn-default"/></p>
                   
               </dl> 
               </form>
@@ -314,9 +321,9 @@ if cookie:
             """
               nbid = int(RunQuery(q3, user, passwd)[0][0])+1
               fn_new = fn[0] + "_" + str(nbid) + '.'+fn[1]
-              open('/www/html/students_17/Group9/bedfiles/' + fn_new, 'wb').write(fileitem.file.read())
+              open('/var/www/dapr_test/bedfiles/' + fn_new, 'wb').write(fileitem.file.read())
               message = 'The file "' + fn_new + '" was successfully uploaded'
-              location = '/students_17/Group9/bedfiles/' + fn_new
+              location = '/dapr_test/bedfiles/' + fn_new
               runQuery(nbid,fn[0] + "_" + str(nbid), location, des1, des2, des3, command,uname, cmid, wmid)
               runQuery2(nbid,eid, uid)
           else:

@@ -20,6 +20,7 @@ if cookie:
     uname = cookie["uname"].value
     
     
+    
     form = cgi.FieldStorage()
     
     newst = form.getvalue("stname")
@@ -28,6 +29,7 @@ if cookie:
     des1 = form.getvalue("description1")
     des2 = form.getvalue("description2")
     des3 = form.getvalue("description3")
+    study_to_delete = form.getvalue("study_to_delete")
     
     prid = form.getvalue('prid')
     
@@ -73,9 +75,9 @@ if cookie:
         connection.close()
         
     def delStudy(plid):
-        connection = pymysql.connect(host=host, user=usr, db=db, passwd=passwd)
+        connection = pymysql.connect(host=host, user=user, db=db, passwd=passwd)
         cursor = connection.cursor()
-        query = """delete from Study where plid = ("%s");""" %(plid)
+        query = """delete from Study where sid = ("%s");""" %(plid)
         cursor.execute(query)
         connection.commit()
         cursor.close()
@@ -93,11 +95,18 @@ if cookie:
     if len(newst) != 0 and len(plid) != 0 and prid2 != None:
         addStudy(newst, plid, prid2, des1, des2, des3, uname, str(datetime.date.today()))
         print("Location: showstudy.py")
+    elif study_to_delete != None:
+        delStudy(study_to_delete)
+        
+        
+    
+        
     
 
     print("Content-type: text/html\n")
     phead(name, admin)
     print("""<div class="container">""")
+    
 
     if admin == "1" and prid == None:
         print('<p class="lead">All studies:</p>')
@@ -313,7 +322,7 @@ if cookie:
         <div class="col-xs-8">
           <label for="input-study" class="col-sm-2 control-label" style="padding-top: 5px;">Study ID:</label>
           <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="Please enter study ID" name="prid">
+            <input class="form-control" type="text" placeholder="Please enter study ID" name="study_to_delete">
           </div>
         </div>
       </div>

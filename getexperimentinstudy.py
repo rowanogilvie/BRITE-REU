@@ -46,7 +46,7 @@ order by create_date desc, title asc;
 
 studies = runQuery(q1, user, passwd)
 
-print("""<option value="-- please select a experiment--"></option>""")
+print("""<option value="-- please select an experiment--"></option>""")
 for row in studies:
     print("<option value=%s>%s</option>" % (row[0], row[1]))
 

@@ -8,7 +8,6 @@ cgitb.enable()
 """
 The following issues need to be addressed:
 -add an experiment; no error thrown, data just isn't added
--remove an experiment; does something weird, unexplainable- no error thrown
 """
 cookie = get_cookies()
 if cookie:
@@ -29,6 +28,7 @@ if cookie:
     des2 = form.getvalue("description2")
     des3 = form.getvalue("description3")
     doe = form.getvalue("doe")
+    eid_to_delete = form.getvalue("eid_to_delete")
     
     sid = form.getvalue('sid')
     
@@ -70,8 +70,7 @@ if cookie:
         connection.commit()
         cursor.close()
         connection.close()
-        print(query1)
-        print(query2)
+        
         
     def delExperiment(eid):
         connection = pymysql.connect(host=host, user=user, db=db, passwd=passwd)
@@ -91,15 +90,15 @@ if cookie:
         connection.close()
         return res
         
-    if len(exp) != 0 and sid2 != None and doe!= None:
-        try:
-            datetime.datetime.strptime(doe, '%Y-%m-%d')
-        except ValueError:
-            print("Location: errordate.py")
-            print("Content-type: text/html\n")
-        else:
-            addExp(exp, sid2, des1, des2, des3, doe, uname, str(datetime.date.today()))
-            print("Location: showexperiment.py")
+    if len(exp) != 0 and sid2 != None:
+        addExp(exp, sid2, des1, des2, des3, doe, uname, str(datetime.date.today()))
+        print("Location: showexperiment.py")
+    elif eid_to_delete != None:
+        delExperiment(eid_to_delete)
+        print("Location: showexperiment.py")
+    else:
+        print("""<p class="message" style="color:red ! important;"><b>Field left empty, please fill in all required fields</b></p>""")
+        #print("Location: showexperiment.py")
 
     print("Content-type: text/html\n")
     phead(name, admin)
@@ -297,7 +296,16 @@ if cookie:
           </div>
         </div>
       </div>
+      <div class="form-group">
+        <div class="col-xs-8">
+            <label for="input-doe" class="col-sm-2 control-label">Date of Experiment:</label>
+            <div class="col-sm-10">
+            <input class="form-control" name="doe" type="text">
+        </div>
+    </div>
+    </div>
     <div>
+    </br>
     <input type="submit" value="Add" class="btn btn-lg btn-default">
     </div>
     </form>
@@ -312,7 +320,7 @@ if cookie:
         <div class="col-xs-8">
           <label for="input-study" class="col-sm-2 control-label" style="padding-top: 5px;">Experiment ID:</label>
           <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="Please enter experiment ID" name="sid">
+            <input class="form-control" type="text" placeholder="Please enter experiment ID" name="eid_to_delete">
           </div>
         </div>
       </div>
@@ -320,7 +328,7 @@ if cookie:
     </br>
     </br>
     <div>
-    <input type="submit" value="Remove" class="btn btn-lg btn-default">
+    <input type="submit" value="Remove" class="btn btn-lg btn-default"/>
     </div>
     </form>
     </div>

@@ -105,7 +105,7 @@ def phead(name, admin):
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEDtools <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="./BEDfile.py">View BED files</a></li>
-                    <li><a href="./BEDfunctions.py">Perform BED functions</a></li>
+                    <li><a href="./BEDfunctions.py">Rowan's Test for BED functions</a></li>
                   </ul>
                 </li>
                 
@@ -113,6 +113,7 @@ def phead(name, admin):
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Upload <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="./upload_v0.1.py">Upload BED file</a></li>
+                    <li><a href="./upload_rowan.py">Upload Rowan</a></li>
                   </ul>
                 </li>
                 

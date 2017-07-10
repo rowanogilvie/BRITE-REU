@@ -39,7 +39,7 @@ if cookie:
         cursor.close()
         connection.close()
         return res
-    def Copy(bid,name, location, des1, des2, des3, command, uname, cmid, wmid,stringency, source,eid):
+    def Copy(bid,name, location, des1, des2, des3, command, uname, cmid, wmid,stringency, source, eid):
         connection = pymysql.connect(host=host, user=user, db=db, passwd=passwd)
         cursor = connection.cursor()
         query1 = """INSERT INTO BEDfile (bid,name, location, description1, description2, description3, 
@@ -122,6 +122,7 @@ if cookie:
         <div class="datagrid"><table id="example" class="display" cellspacing="0" width="100%">
           <thead>
                  <tr>
+                     <th></th>
                      <th>ID</th>
                      <th>BED file</th>
                      <th>Wetlab method</th>
@@ -143,6 +144,7 @@ if cookie:
                 print('<tbody><tr class="alt">')
             else:
                 print('<tbody><tr>')
+            print("""<td><input type="checkbox"/></td>""")
             for j in range(len(row)):
                 if j == 0 or j == 2:
                     print("""<td>

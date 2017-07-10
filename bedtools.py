@@ -77,7 +77,7 @@ if cookie:
         cursor.close()
         connection.close()
     
-    dire = "/www/html/students_17/Group9/bedfiles/"
+    dire = "/var/www/dapr_test/bedfiles/"
     
     f1 = form.getvalue("f1")
     f2 = form.getvalue("f2")
