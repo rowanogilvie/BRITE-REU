@@ -35,19 +35,16 @@ def runQuery(query, user, passwd):
     connection.close()
     return res
 
-sid = form.getvalue('study')
+	
+sid = form.getvalue('sid')
 
 q1 = """
-select plid,plname from Platform join Study using(plid) 
-where sid="%s" 
-Group by  plid
-order by date desc;
+ select plid,plname from Platform join Study using(plid)  where sid=%s ;
 """ %sid
-
 
 studies = runQuery(q1, user, passwd)
 
-print("""<option value="-- please select a platform--"></option>""")
+
 for row in studies:
     print("<option value=%s>%s</option>" % (row[0], row[1]))
 

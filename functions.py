@@ -51,7 +51,7 @@ def phead(name, admin):
         <link rel="icon" href="../../favicon.ico">
         
         
-        <title>DASR: Database for the Analysis of Sequencing Reads</title>
+        <title>DAPR: Database for the Analysis of Peak Regions</title>
         
         <!-- Bootstrap core CSS -->
         <link href="../../dapr_test/css/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -74,11 +74,11 @@ def phead(name, admin):
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="./index.py">DASR</a>
+              <a class="navbar-brand" href="./home.py">DAPR</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li><a href="./index.py">Home</a></li>
+                <li><a href="./home.py">Home</a></li>
                 
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
@@ -113,12 +113,14 @@ def phead(name, admin):
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Upload <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="./upload_v0.1.py">Upload BED file</a></li>
-                    <li><a href="./upload_rowan.py">Upload Rowan</a></li>
+                    
                   </ul>
                 </li>
                 
+                <li><a href="https://genome.ucsc.edu/" target="_blank">UCSC Browser</a></li>
                 <li><a href="./help.py">Help</a></li>
                 <li><a href="./about.py">About</a></li>
+                
                 
               </ul>
             
@@ -138,13 +140,13 @@ def ptmpbody():
     print("""
     <div class="container">
       <div class="page-header">
-        <h1><div class="well">DASR (Database for the Analysis of Sequencing Reads)</div></h1>
+        <h1><div class="well">DAPR (Database for the Analysis of Peak Regions)</div></h1>
         
       <h3>
-      What is DASR?
+      What is DAPR?
       </h3>
       <div>
-      Database for the Analysis of Sequencing Reads (DASR) is an online database for 
+      Database for the Analysis of Peak Regions (DAPR) is an online database for 
       the storage, output, query and analysis of
       <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">
       Browser Extensible Data (BED)</a>.
@@ -154,7 +156,7 @@ def ptmpbody():
       Purpose of the database?
       </h3>
       <div>
-      <p>DASR was developed to facilitate data storage and analysis. Biologists can upload
+      <p>DAPR was developed to facilitate data storage and analysis. Biologists can upload
       BED files to the database and identify overlapping regions of genomic features by
       the integrated utility
       <a href="http://bedtools.readthedocs.io/en/latest/">
@@ -170,9 +172,18 @@ def ptmpbody():
       The database was developed by Akanksha Raju Khorgade, Junming Hu, Thomas Marsden,
       and Zhe Wang at Boston University as part of BF768 
       Biological Database Analysis, Spring 2017, G. Benson instructor. Faculty advisor:
-      Prof. David Waxman.
+      Prof. David Waxman.</br>
+      The database was also developed by Rowan Ogilvie at Boston University as part of 
+      the Bioinformatics BRITE REU Program, Summer 2017, organized by G. Benson. Faculty advisor: 
+      Prof. David Waxman. Graduate student advisor: Gracia Bonilla.
       </div>
       <br/>
+      <div>
+      <p><b>Rowan Ogilvie</b></br>
+      Bioinformatics Program at Rochester Institute of Technology,</br>
+      rxo2485@rit.edu
+      </br>
+      <div>
       <div>
       <p><b>Junming Hu</b></br>
       Bioinformatics Program at Boston University,</br>

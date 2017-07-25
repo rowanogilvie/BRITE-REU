@@ -4,6 +4,7 @@ import cgitb
 import pymysql
 from subprocess import call
 import datetime
+import json
 from functions import get_cookies, phead, ptail
 cgitb.enable()
 """
@@ -24,6 +25,8 @@ if cookie:
     
     
     form = cgi.FieldStorage()
+    cb = form.getvalue("checkboxes")
+    j = json.loads(cb)
     
     #reduce redundancy
     user="d4prdb17"
@@ -77,15 +80,32 @@ if cookie:
         cursor.close()
         connection.close()
     
+    def query_bedname(bid):
+        connection = pymysql.connect(host=host, user=user, db=db, passwd=passwd)
+        cursor = connection.cursor()
+        query6 = """
+            select name from BEDfile
+            where bid = "%s"
+            """ % bid
+        cursor.execute(query6)
+        res = cursor.fetchall()
+        connection.close()
+        return res
+    
     dire = "/var/www/dapr_test/bedfiles/"
     
-    f1 = form.getvalue("f1")
-    f2 = form.getvalue("f2")
-    eid = form.getvalue("eid")
+
+    f1_bid = j[0]    
+    f2_bid = j[1]
+    
+    f1 = str(query_bedname(f1_bid))
+    f2 = str(query_bedname(f2_bid))
+    eid = int(form.getvalue("eid"))
     
     if f1 and f2 and eid:
-        bedname = "Intersection_of_"+f1[:-4]+"_and_"+f2[:-4]
-        locpre = "/students_17/Group9/bedfiles/"
+        bedname = "Intersection_of_"+f1[3:-5]+"_and_"+f2[3:-5]
+    
+        locpre = "/dapr_test/bedfiles/"
         loc = locpre+bedname+".bed"
         
         getbid = """
@@ -98,7 +118,9 @@ if cookie:
         where eid = "%s"
         """ % eid
         
-        ename = runQuery(getename, user, passwd)[0][0]
+        
+        
+       # ename = runQuery(getename, user, passwd)[0][0]
         command = "bedtools intersect -a " + f1 + ".bed " + "-b " + f2 + ".bed"
         
         with open(dire+"Intersection_of_"+f1[:-4]+"_and_"+f2[:-4]+".bed", "w") as f:
@@ -110,15 +132,19 @@ if cookie:
         update_exp(bid, eid, uid)
         
         print("Content-type: text/html\n")
-        print("""
-        <p><b>Generated BED file %s in experiment %s</b></p>
-        """ % (bedname, ename))
+        print("""Files were successfully intersected. Click OK to be directed to new list of BED files.""") 
+       
     
     else:
         print("Content-type: text/html\n")
         print("""
-        <p><b>Invalid inputs! No file was generated!</b></p>
-        """)
+                "Invalid inputs! No file was generated! Please try again"
+                """) 
+        print("""
+                </script>
+                """) 
+        
+        
 
 else:
     print("Location: login.py")

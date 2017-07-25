@@ -38,7 +38,7 @@ form = cgi.FieldStorage()
 cookie = get_cookies()
 
 if cookie != None:
-    print("Location: index.py")
+    print("Location: home.py")
     print("Content-type: text/html\n")
 else:
     #extract specific fields from the form
@@ -154,26 +154,26 @@ else:
         else:
             cookie = Cookie.SimpleCookie()
             cookie["uid"] = validuser[0][0]
-            cookie["uid"]["max-age"] = 60*60
+            cookie["uid"]["max-age"] = 2*60*60
             
             cookie["uname"] = validuser[0][1]
-            cookie["uname"]["max-age"] = 60*60
+            cookie["uname"]["max-age"] = 2*60*60
             
             cookie["pword"] = validuser[0][2]
-            cookie["pword"]["max-age"] = 60*60
+            cookie["pword"]["max-age"] = 2*60*60
             
             cookie["fname"] = validuser[0][3]
-            cookie["fname"]["max-age"] = 60*60
+            cookie["fname"]["max-age"] = 2*60*60
             
             cookie["lname"] = validuser[0][4]
-            cookie["lname"]["max-age"] = 60*60
+            cookie["lname"]["max-age"] = 2*60*60
             
             cookie["admin"] = validuser[0][5]
-            cookie["admin"]["max-age"] = 60*60
+            cookie["admin"]["max-age"] = 2*60*60
             
             cookie["appro"] = validuser[0][6]
-            cookie["appro"]["max-age"] = 60*60
+            cookie["appro"]["max-age"] = 2*60*60
             
             print(cookie)
-            print("Location: index.py")
+            print("Location: home.py")
             print("Content-type: text/html\n")

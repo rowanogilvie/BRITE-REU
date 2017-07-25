@@ -55,9 +55,10 @@ if eid != "-- please select a experiment--":
     
     beds = runQuery(q1, user, passwd)
     
-    print('<p><font size="4">All BED files in experiment <b>%s</b>:</font></p>' % exname)
-    print("""<div class="datagrid"><table border=1>
-          <thead>
+    #print('<p><font size="4">All BED files in experiment <b>%s</b>:</font></p>' % exname)
+    print("""
+	<div class="datagrid"><table id="example" class="display" cellspacing="0" width="100%">
+	      <thead>
           <tr>
           <th>BED file</th>
           <th>Wetlab method</th>

@@ -215,6 +215,7 @@ if cookie:
             else:
                 row = res2[i-n1-1]
             print("<tr>")
+            
             for j in range(len(row)):
                 if j == 0 or j == 1:
                     print("""<td>

@@ -134,17 +134,14 @@ if cookie:
                      <th>Upload time</th>
                      <th>bedtools command</th>
                      <th>Download</th>
-                   </tr></thead>"""
+                   </tr></thead><tbody>"""
                    )
         n1 = len(res1)
         for i in range(n1):
             row = res1[i]
 
-            if i % 2 == 1:
-                print('<tbody><tr class="alt">')
-            else:
-                print('<tbody><tr>')
             print("""<td><input type="checkbox"/></td>""")
+            
             for j in range(len(row)):
                 if j == 0 or j == 2:
                     print("""<td>
@@ -154,8 +151,9 @@ if cookie:
                     pass
                 else:
                     print("<td>%s</td>" % str(row[j]))
-            print("""<td><a href="%s">Download</a></td>""" % row[1])
-            print("</tr></tbody>")
+            
+            print("""<td><a href="%s">Download</a></td></tr>""" % row[1])
+        print("</tbody>")
         print("</table></div></br></br>")
     nuname = form.getvalue("uname")
     nbid = form.getvalue("bid")
@@ -201,7 +199,6 @@ if cookie:
         neid = runQuery(q4,user,passwd)
         name = add_new[0][2] + "_" + str(nbid)
         Copy(nbid,name, add_new[0][3], add_new[0][4], add_new[0][5], add_new[0][6], add_new[0][7], nuname, add_new[0][1], add_new[0][0],add_new[0][8], add_new[0][9],neid)
-
     ptail()
     
 

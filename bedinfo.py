@@ -72,7 +72,7 @@ if cookie:
     if bid != None:
         res = runQuery(q1, user, passwd)
         filename = res[0][0]   
-        feature_lengths = read_file("/www/html/"+res[0][1])
+        feature_lengths = read_file("/var/www/"+res[0][1])
         cl_lengths = clean_lengths(feature_lengths)
 
         print("""
